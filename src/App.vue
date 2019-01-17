@@ -1,28 +1,48 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div>
+        <p>Duration (HH MM SS)</p>
+
+        <input type="number" min="0" max="99" v-model.number="hh">
+        <input type="number" min="0" max="59" v-model.number="mm">
+        <input type="number" min="0" max="59" v-model.number="ss">
+
+        <p>Duration in seconds {{ seconds }}</p>
+
+        <hr>
+
+        <p>Playback speed</p>
+        <input type="number" min="1" max="2" step=".05" v-model.number="speed">
+
+        <hr>
+
+        <p>Watch Time {{ watchTime }} ({{ watchTimeInSeconds }} seconds)</p>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
+    data () {
+        return {
+            hh: 0,
+            mm: 0,
+            ss: 0,
+            speed: 1
+        };
+    },
+    computed: {
+        seconds () {
+            return this.hh * 3600 + this.mm * 60 + this.ss;
+        },
+        watchTimeInSeconds () {
+            return Math.ceil(this.seconds / this.speed);
+        },
+        watchTime () {
+            const measuredTime = new Date(null);
+            measuredTime.setSeconds(this.watchTimeInSeconds);
+            return measuredTime.toISOString().substr(11, 8);
+        }
+    }
+};
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style src="./style.css"></style>

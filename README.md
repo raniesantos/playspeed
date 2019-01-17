@@ -1,4 +1,4 @@
-# playspeed
+# PlaySpeed
 
 ## Project setup
 ```
