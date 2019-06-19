@@ -11,7 +11,7 @@
         <hr>
 
         <p>Playback speed</p>
-        <input type="number" min="1" max="2" step=".05" v-model.number="speed">
+        <input type="number" min="1" max="3" step=".05" v-model.number="speed">
 
         <hr>
 
